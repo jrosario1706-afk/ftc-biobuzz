@@ -11,13 +11,16 @@ Todo lo que usas en el día a día, en un solo lugar.
 | **Proyecto FTC** | `C:\Users\jhoan\OneDrive\Documents\deepseek-harness\default-workspace\FtcRobotController-BIOBUZZ` |
 | **Tu código (OpModes)** | `...\FtcRobotController-BIOBUZZ\TeamCode\src\main\java\org\firstinspires\ftc\teamcode\` |
 | **APK compilado** | `...\FtcRobotController-BIOBUZZ\TeamCode\build\outputs\apk\debug\TeamCode-debug.apk` |
-| **Android Studio (el bueno)** | `C:\Program Files\Android\Android Studio1\bin\studio64.exe` |
-| **Java (JDK)** | `C:\Program Files\Android\Android Studio1\jbr` |
+| **Android Studio (el bueno)** | `C:\Program Files\Android\Android Studio2\bin\studio64.exe` |
+| **Java (JDK)** | `C:\Program Files\Android\Android Studio2\jbr` |
+| **Abrir el proyecto** | `...\FtcRobotController-BIOBUZZ\ABRIR-ANDROID-STUDIO.cmd` |
+| **Guía de conexión** | `...\CONECTAR-Y-ENVIAR.md` |
 | **Android SDK** | `C:\Users\jhoan\AppData\Local\Android\Sdk` |
 | **ADB (conectar robot)** | `C:\Users\jhoan\AppData\Local\Android\Sdk\platform-tools\adb.exe` |
 | **Guía de hardware** | `...\FtcRobotController-BIOBUZZ\CONFIGURACION-HARDWARE.md` |
 
-> ⚠️ La carpeta buena de Android Studio es **`Android Studio1`** (con el "1"). La que no tiene el "1" está rota.
+> ⚠️ La carpeta buena de Android Studio es **`Android Studio2`**. Las carpetas
+> `Android Studio` y `Android Studio1` están incompletas (no abren): no las uses.
 
 ---
 
@@ -47,21 +50,24 @@ Todo lo que usas en el día a día, en un solo lugar.
 ## ▶️ Compilar e instalar al robot
 
 ### Método 1 — Android Studio (recomendado)
-1. Abre **Android Studio1**.
-2. Conecta el **Control Hub** por USB.
-3. Pulsa el botón verde **▶️ Run**.
+1. Doble clic en **`ABRIR-ANDROID-STUDIO.cmd`** (abre el Studio bueno).
+2. Doble clic en **`1-CONECTAR-ROBOT.cmd`** y espera `ROBOT CONECTADO`.
+3. Arriba a la derecha elige **`TeamCode`** y pulsa **▶️ Run**.
+
+> Detalle paso a paso (WiFi y USB) en **`CONECTAR-Y-ENVIAR.md`**.
 
 ### Método 2 — Terminal (sin abrir Android Studio)
-Abre PowerShell y pega:
+
+Doble clic en **`2-ENVIAR-CODIGO.cmd`**. O desde PowerShell:
 
 ```powershell
 cd "C:\Users\jhoan\OneDrive\Documents\deepseek-harness\default-workspace\FtcRobotController-BIOBUZZ"
-$env:JAVA_HOME = "C:\Program Files\Android\Android Studio1\jbr"
+$env:JAVA_HOME = "C:\Program Files\Android\Android Studio2\jbr"
 
 # Solo compilar (genera el APK)
 .\gradlew.bat :TeamCode:assembleDebug
 
-# Compilar Y subir al robot (con el Control Hub conectado por USB)
+# Compilar Y subir al robot (robot ya conectado)
 .\gradlew.bat :TeamCode:installDebug
 ```
 
@@ -74,9 +80,10 @@ $env:JAVA_HOME = "C:\Program Files\Android\Android Studio1\jbr"
 ### Ver si el robot está conectado
 
 ```powershell
-& "$env:LOCALAPPDATA\Android\Sdk\platform-tools\adb.exe" devices
+.\1-CONECTAR-ROBOT.cmd
 ```
-Si sale la lista vacía → el Control Hub no está conectado.
+Ese script prueba USB y WiFi, reinicia adb si hace falta y te dice qué falla.
+Si `adb devices` sale vacío → no hay robot conectado.
 
 ---
 

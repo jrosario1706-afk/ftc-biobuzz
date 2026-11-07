@@ -1,0 +1,24 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+application {
+    mainClass = 'org.firstinspires.ftc.teamcode.meepmeep.MeepMeepSim'
+}
+
+repositories {
+    mavenCentral()
+    google()
+    maven { url = 'https://jitpack.io' }
+    maven { url = 'https://maven.brott.dev/' }
+}
+
+dependencies {
+    implementation 'com.github.rh-robotics:MeepMeep:v1.1.0'
+}
